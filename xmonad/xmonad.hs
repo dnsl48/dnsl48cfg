@@ -147,6 +147,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
   , ((noModMask, xF86XK_MonBrightnessDown), spawn $ brightness_sh "down" "5")
 
+  , ((noModMask, xF86XK_Display), spawn $ brightness_sh "toggle" "")
+
   , ((noModMask, xK_Print), spawn "imlib2_grab ~/screenshot.png")
   ]
 
