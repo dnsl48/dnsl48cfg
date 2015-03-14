@@ -160,4 +160,4 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
   ]
 
 
-changeBg = spawn "feh --bg-fill /home/dns/bgimages/$(ls /home/dns/bgimages/ | sort -R | tail -n 1)"
+changeBg = spawn "feh --bg-fill ~/bgimages/$(ls ~/bgimages/ | sort -R | tail -n 1)"
