@@ -1,0 +1,12 @@
+[alias]
+	co = checkout
+	ci = commit
+	st = status
+	br = branch
+
+[core]
+	excludesfile = ~/dnsl48cfg/git/ignore
+
+[user]
+	name = dnsl48
+	email = dnsl48@gmail.com
