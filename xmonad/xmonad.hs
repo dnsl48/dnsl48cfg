@@ -5,6 +5,8 @@ import XMonad.Layout.Spacing
 import Control.Monad
 import Data.Monoid
 
+import Graphics.X11.ExtraTypes.XF86
+
 import System.Directory
 import System.Exit
 import System.FilePath
@@ -20,7 +22,6 @@ main = xmonad defaultConfig
   {
     modMask = mod4Mask,
     borderWidth = 2,
---    layoutHook = myLayout,
     workspaces = fst myWorkspaces,
     keys = myKeys,
     terminal = "lilyterm",
@@ -29,12 +30,10 @@ main = xmonad defaultConfig
   }
 
 
-myLayout = tiled ||| Mirror tiled ||| Full
-  where
-    tiled = spacing 5 $ Tall nmaster delta ratio
-    nmaster = 1
-    ratio = 2 / 3
-    delta = 5 / 100
+-- sudoers:
+-- ALL ALL = (root) NOPASSWD: abspath~/dnsl48cfg/xmonad/brightness.sh
+brightness_sh dir val = "sudo ~/dnsl48cfg/xmonad/brightness.sh " ++ device ++ " " ++ dir ++ " " ++ val
+  where device = "radeon_bl0"
 
 
 -- (list of workspaces, amount of workspaces for each line)
@@ -137,6 +136,18 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
   , ((modm .|. shiftMask, xK_Down), do replicateM 4 (shiftToPrev >> nextWS); return ())
 
   , ((modm .|. shiftMask, xK_Up), do replicateM 4 (shiftToPrev >> prevWS); return ())
+
+  , ((noModMask, xF86XK_AudioMute), spawn "pacmd dump|awk --non-decimal-data '$1~/set-sink-mute/{system (\"pacmd \"$1\" \"$2\" \"($3==\"yes\"?\"no\":\"yes\"))}'")
+
+  , ((noModMask, xF86XK_AudioLowerVolume), spawn "pacmd dump|awk --non-decimal-data '$1~/set-sink-volume/{system (\"pacmd \"$1\" \"$2\" \"$3-1000)}'")
+
+  , ((noModMask, xF86XK_AudioRaiseVolume), spawn "pacmd dump|awk --non-decimal-data '$1~/set-sink-volume/{system (\"pacmd \"$1\" \"$2\" \"$3+1000)}'")
+
+  , ((noModMask, xF86XK_MonBrightnessUp), spawn $ brightness_sh "up" "5")
+
+  , ((noModMask, xF86XK_MonBrightnessDown), spawn $ brightness_sh "down" "5")
+
+  , ((noModMask, xK_Print), spawn "imlib2_grab ~/screenshot.png")
   ]
 
   ++
