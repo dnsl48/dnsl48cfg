@@ -1,5 +1,5 @@
 import XMonad
-import XMonad.Actions.CycleWS
+import XMonad.Actions.Plane
 import XMonad.Layout.Spacing
 
 import Control.Monad
@@ -18,11 +18,25 @@ import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
 
+data Dnsl48Workspaces = Dnsl48Workspaces {
+    wsLines :: Int,
+    wsSpaces :: Int
+}
+
+wsList :: Dnsl48Workspaces -> [String]
+wsList a = [show i | i <- [1 .. ((wsLines a) * (wsSpaces a))]]
+
+dnsl48Workspaces = Dnsl48Workspaces {
+  wsLines = 3,
+  wsSpaces = 4
+}
+
+
 main = xmonad defaultConfig
   {
     modMask = mod4Mask,
     borderWidth = 2,
-    workspaces = fst myWorkspaces,
+    workspaces = wsList dnsl48Workspaces,
     keys = myKeys,
     terminal = "lilyterm",
     focusFollowsMouse = False,
@@ -36,16 +50,8 @@ brightness_sh dir val = "sudo ~/dnsl48cfg/xmonad/brightness.sh " ++ device ++ " 
   where device = "radeon_bl0"
 
 
--- (list of workspaces, amount of workspaces for each line)
-myWorkspaces = 
-  ([show i :: String | i <- [1 .. lines * count]], count)
-  where
-    lines = 3
-    count = 4
-
-
 -- key bindings
-myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
+myKeys conf@(XConfig {XMonad.modMask = modm}) = M.union (M.fromList $
 
   -- launch a terminal
   [
@@ -116,27 +122,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
   -- Restart xmonad
   , ((modm, xK_q), spawn "xmonad --recompile; xmonad --restart")
 
-  -- Prev workspace
-  , ((modm, xK_Left), prevWS)
-
-  -- Next workspace
-  , ((modm, xK_Right), nextWS)
-
-  -- Shift to prev workspace
-  , ((modm .|. shiftMask, xK_Left), shiftToPrev >> prevWS)
-
-  -- Shift to next workspace
-  , ((modm .|. shiftMask, xK_Right), shiftToNext >> nextWS)
-
-  -- 
-  , ((modm, xK_Down), do replicateM (snd myWorkspaces) nextWS; return ())
-
-  , ((modm, xK_Up), do replicateM (snd myWorkspaces) prevWS; return ())
-
-  , ((modm .|. shiftMask, xK_Down), do replicateM 4 (shiftToPrev >> nextWS); return ())
-
-  , ((modm .|. shiftMask, xK_Up), do replicateM 4 (shiftToPrev >> prevWS); return ())
-
   , ((noModMask, xF86XK_AudioMute), spawn "pacmd dump|awk --non-decimal-data '$1~/set-sink-mute/{system (\"pacmd \"$1\" \"$2\" \"($3==\"yes\"?\"no\":\"yes\"))}'")
 
   , ((noModMask, xF86XK_AudioLowerVolume), spawn "pacmd dump|awk --non-decimal-data '$1~/set-sink-volume/{system (\"pacmd \"$1\" \"$2\" \"$3-1000)}'")
@@ -159,7 +144,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     ((m .|. modm, k), windows $ f i)
   | (i, k) <- zip (XMonad.workspaces conf) [xK_ampersand, xK_bracketleft, xK_braceleft, xK_braceright]
   , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]
-  ]
+  ]) $ planeKeys modm (Lines $ wsLines dnsl48Workspaces) Circular
 
 
 changeBg = spawn "feh --bg-fill ~/bgimages/$(ls ~/bgimages/ | sort -R | tail -n 1)"
