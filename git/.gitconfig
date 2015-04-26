@@ -6,6 +6,7 @@
 
 [core]
 	excludesfile = ~/dnsl48cfg/git/ignore
+	editor = zile
 
 [user]
 	name = dnsl48
