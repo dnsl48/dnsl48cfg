@@ -9,7 +9,7 @@ HISTFILESIZE=10000
 HISTSIZE=5000
 
 export EDITOR=zile
-export PATH="$PATH:~/.cabal/bin"
+export PATH="$PATH:~/.cabal/bin:~/.gem/ruby/2.2.0/bin"
 
 
 PS1='[\u@\h \W]\$ '
