@@ -47,7 +47,8 @@ main = xmonad defaultConfig
 -- sudoers:
 -- ALL ALL = (root) NOPASSWD: abspath~/dnsl48cfg/xmonad/brightness.sh
 brightness_sh dir val = "sudo ~/dnsl48cfg/xmonad/brightness.sh " ++ device ++ " " ++ dir ++ " " ++ val
-  where device = "radeon_bl0"
+--  where device = "radeon_bl0"
+    where device = "intel_backlight"
 
 
 -- key bindings
@@ -136,6 +137,16 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.union (M.fromList $
 
   , ((noModMask, xK_Print), spawn "imlib2_grab ~/screenshot.png")
   ]
+
+  ++
+
+  --
+  -- mod-{semicolon,comma}, Switch to physical/Xinerama screens 1 or 2
+  -- mod-shift-{semicolon,comma}, Move client to screen 1 or 2
+  --
+  [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
+      | (key, sc) <- zip [xK_semicolon, xK_comma] [0..]
+      , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
   ++
 
