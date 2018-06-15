@@ -1,12 +1,14 @@
 [alias]
 	co = checkout
 	ci = commit
-	st = status
-	br = branch
+	s = status
+	b = branch
+	a = add
+	d = diff
 
 [core]
 	excludesfile = ~/dnsl48cfg/git/ignore
-	editor = zile
+	editor = mg -n
 
 [user]
 	name = dnsl48
