@@ -38,7 +38,7 @@ main = xmonad defaultConfig
     borderWidth = 2,
     workspaces = wsList dnsl48Workspaces,
     keys = myKeys,
-    terminal = "lilyterm",
+    terminal = "kitty",
     focusFollowsMouse = False,
     startupHook = changeBg
   }
@@ -57,6 +57,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.union (M.fromList $
   -- launch a terminal
   [
     ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
+
+  , ((modm .|. shiftMask, xK_l), spawn "xlock -mode maze")
 
   -- launch dmenu
   , ((modm, xK_p), spawn "gmrun")
