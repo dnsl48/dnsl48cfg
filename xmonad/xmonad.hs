@@ -147,7 +147,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.union (M.fromList $
   -- mod-shift-{semicolon,comma}, Move client to screen 1 or 2
   --
   [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-      | (key, sc) <- zip [xK_semicolon, xK_comma] [0..]
+      | (key, sc) <- zip [xK_semicolon, xK_comma, xK_period] [0..]
       , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
   ++
