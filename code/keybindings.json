@@ -1,0 +1,52 @@
+// Place your key bindings in this file to override the defaults
+[
+    {
+        "key": "ctrl+[Backslash]",
+        "command": "workbench.view.explorer"
+    },
+    {
+        "key": "ctrl+shift+[Backslash]",
+        "command": "workbench.action.toggleSidebarVisibility"
+    },
+    {
+        "key": "ctrl+shift+e",
+        "command": "-workbench.view.explorer"
+    },
+    {
+        "key": "ctrl+[Backslash]",
+        "command": "-workbench.action.splitEditor"
+    },
+    {
+        "key": "ctrl+x Shift+[Digit1]",
+        "command": "workbench.action.splitEditor",
+        "when": "editorFocus"
+    },
+    {
+        "key": "ctrl+shift+[Backslash]",
+        "command":"workbench.action.toggleSidebarVisibility"
+    },
+    {
+        "key": "ctrl+n",
+        "command": "-workbench.action.files.newUntitledFile"
+    },
+    {
+        "key": "ctrl+n",
+        "command": "list.focusDown",
+        "when": "listFocus && !inputFocus"
+    },
+    {
+        "key": "ctrl+p",
+        "command": "list.focusUp",
+        "when": "listFocus && !inputFocus"
+    },
+    {
+        "key": "alt+shift+,",
+        "command": "list.focusFirstChild",
+        "when": "listFocus && !inputFocus"
+    },
+    {
+        "key": "alt+shift+.",
+        "command": "list.focusLastChild",
+        "when": "listFocus && !inputFocus"
+    }
+]
