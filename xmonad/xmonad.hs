@@ -1,6 +1,7 @@
 import XMonad
 import XMonad.Actions.Plane
 import XMonad.Layout.Spacing
+import XMonad.Util.Cursor
 
 import Control.Monad
 import Data.Monoid
@@ -38,9 +39,9 @@ main = xmonad defaultConfig
     borderWidth = 2,
     workspaces = wsList dnsl48Workspaces,
     keys = myKeys,
-    terminal = "kitty",
+    terminal = "alacritty",
     focusFollowsMouse = False,
-    startupHook = changeBg
+    startupHook = seq changeBg changeCursor
   }
 
 
@@ -58,7 +59,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.union (M.fromList $
   [
     ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
 
-  , ((modm .|. shiftMask, xK_l), spawn "xlock -mode maze")
+  -- , ((modm .|. shiftMask, xK_l), spawn "xlock -mode maze")
+  , ((modm .|. shiftMask, xK_l), spawn "env XSECURELOCK_SAVER=saver_xscreensaver xsecurelock")
 
   -- launch dmenu
   , ((modm, xK_p), spawn "gmrun")
@@ -161,3 +163,5 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.union (M.fromList $
 
 
 changeBg = spawn "feh --bg-fill ~/bgimages/$(ls ~/bgimages/ | sort -R | tail -n 1)"
+
+changeCursor = setDefaultCursor xC_left_ptr
