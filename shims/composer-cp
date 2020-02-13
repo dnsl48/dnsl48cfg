@@ -1,0 +1,1 @@
+composer -vvv create-project --keep-vcs --prefer-source -- $@
