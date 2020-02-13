@@ -5,11 +5,12 @@
 	b = branch
 	a = add
 	d = diff
+	l = log
 
 [core]
 	excludesfile = ~/dnsl48cfg/git/ignore
 	editor = mg -n
 
 [user]
-	name = dnsl48
+	name = Serge Latyntcev
 	email = dnsl48@gmail.com
