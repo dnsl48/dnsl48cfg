@@ -1,0 +1,1 @@
+docker run --rm -it --tty -u "$(id -u):$(id -g)" -v "$HOME/.cache/composer/:/tmp/" -v "$PWD:/app" composer --ignore-platform-reqs $@
