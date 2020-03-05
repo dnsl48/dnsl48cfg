@@ -7,16 +7,15 @@
 
 HISTFILESIZE=10000
 HISTSIZE=5000
+shopt -s histappend
 
 export EDITOR="mg -n"
-# export PATH="$PATH:~/.cabal/bin:~/.gem/ruby/2.2.0/bin"
+export PATH="~/.local/bin:$PATH:~/dnsl48cfg/shims"
 
 
-PS1='[\u@\h \W]\$ '
+PS1='[\u \W]\$ '
 
 alias ls='ls --color=auto'
-alias ll='ls -lhF --color=auto'
-alias lla='ls -lhaF --color=auto'
+alias l='ls -lhF --color=auto'
+alias la='ls -lhaF --color=auto'
 alias dc=docker-compose
-
-shopt -s histappend
