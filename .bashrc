@@ -17,5 +17,5 @@ PS1='[\u \W]\$ '
 
 alias ls='ls --color=auto'
 alias l='ls -lhF --color=auto'
-alias la='ls -lhaF --color=auto'
+alias ll='ls -lhaF --color=auto'
 alias dc=docker-compose
