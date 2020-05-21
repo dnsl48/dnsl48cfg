@@ -1,1 +1,10 @@
-docker run --rm -it --tty -u "$(id -u):$(id -g)" -v "$HOME/.cache/composer/:/tmp/" -v "$PWD:/app" composer --ignore-platform-reqs $@
+export GIT_CONFIG=$(git config --show-origin --global -l | head -n 1 | awk '{ print substr($1, index($1, ":")+1); }')
+
+docker run --rm -it --tty \
+           -u "$(id -u):$(id -g)" \
+           -v "$HOME/.cache/composer/:/tmp/" \
+           -v "$PWD:/app" \
+           -v "$SSH_AUTH_SOCK:$SSH_AUTH_SOCK" \
+           -e SSH_AUTH_SOCK="$SSH_AUTH_SOCK" \
+           -e GIT_CONFIG="$GIT_CONFIG" \
+composer $@
