@@ -1,0 +1,20 @@
+'atom-workspace, atom-text-editor':
+  'ctrl-tab': 'autocomplete-plus:activate'
+  'ctrl-a': 'editor:move-to-first-character-of-line'
+  'ctrl-;': 'bracket-matcher:go-to-matching-bracket'
+  'ctrl-c enter': 'hyperclick:confirm-cursor'
+  'ctrl-c h': 'datatip:toggle'
+  'ctrl-c s': 'snippets:expand'
+
+'.tree-view':
+  'ctrl-p': 'core:move-up'
+  'ctrl-n': 'core:move-down'
+
+'atom-text-editor.autocomplete-active':
+  'ctrl-p': 'core:move-up'
+  'ctrl-n': 'core:move-down'
+
+'atom-text-editor:not(.mini)':
+  'tab': 'editor:auto-indent'
+  'ctrl-s': 'atomic-emacs:isearch-forward'
+  'ctrl-r': 'atomic-emacs:isearch-backward'
