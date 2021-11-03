@@ -19,3 +19,7 @@ alias ls='ls --color=auto'
 alias l='ls -lhF --color=auto'
 alias ll='ls -lhaF --color=auto'
 alias dc=docker-compose
+alias mk='microk8s kubectl'
+alias cd='cd -P'
+
+export CHROME_EXECUTABLE=google-chrome-stable

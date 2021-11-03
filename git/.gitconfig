@@ -6,6 +6,7 @@
 	a = add
 	d = diff
 	l = log
+	fixup = "!f() { TARGET=$(git rev-parse "$1"); git commit --fixup=$TARGET ${@:2} && EDITOR=true git rebase -i --autostash --autosquash $TARGET^; }; f"
 
 [core]
 	excludesfile = ~/dnsl48cfg/git/ignore
@@ -14,10 +15,7 @@
 [user]
 	name = Serge Latyntcev
 	email = dnsl48@gmail.com
-[filter "lfs"]
-	process = git-lfs filter-process
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
 [pull]
 	ff = only
+[init]
+	defaultBranch = main
