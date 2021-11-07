@@ -1,7 +1,6 @@
 import XMonad
 import XMonad.Actions.Plane
 import XMonad.Layout.Spacing
-import XMonad.Util.Cursor
 
 import Control.Monad
 import Data.Monoid
@@ -41,7 +40,7 @@ main = xmonad defaultConfig
     keys = myKeys,
     terminal = "alacritty",
     focusFollowsMouse = False,
-    startupHook = seq changeBg changeCursor
+    startupHook = changeBg
   }
 
 
@@ -59,11 +58,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.union (M.fromList $
   [
     ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
 
-  -- , ((modm .|. shiftMask, xK_l), spawn "xlock -mode maze")
-  , ((modm .|. shiftMask, xK_l), spawn "env XSECURELOCK_SAVER=saver_xscreensaver xsecurelock")
+  , ((modm .|. shiftMask, xK_l), spawn "xlock -mode maze")
 
   -- launch dmenu
-  , ((modm, xK_p), spawn "gmrun")
+  , ((modm, xK_p), spawn "rofi -modi 'drun' -show drun")
 
   , ((modm, xK_b), changeBg)
 
@@ -139,7 +137,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.union (M.fromList $
 
   , ((noModMask, xF86XK_Display), spawn $ brightness_sh "toggle" "")
 
-  , ((noModMask, xK_Print), spawn "imlib2_grab ~/screenshot.png")
+  -- , ((noModMask, xK_Print), spawn "imlib2_grab ~/screenshot.png")
+  , ((noModMask, xK_Print), spawn "spectacle")
   ]
 
   ++
@@ -149,7 +148,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.union (M.fromList $
   -- mod-shift-{semicolon,comma}, Move client to screen 1 or 2
   --
   [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-      | (key, sc) <- zip [xK_semicolon, xK_comma, xK_period] [0..]
+      | (key, sc) <- zip [xK_semicolon, xK_comma] [0..]
       , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
   ++
@@ -163,5 +162,3 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.union (M.fromList $
 
 
 changeBg = spawn "feh --bg-fill ~/bgimages/$(ls ~/bgimages/ | sort -R | tail -n 1)"
-
-changeCursor = setDefaultCursor xC_left_ptr
