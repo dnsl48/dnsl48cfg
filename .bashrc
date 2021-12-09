@@ -12,7 +12,6 @@ shopt -s histappend
 export EDITOR="mg -n"
 export PATH="~/.local/bin:$PATH:~/dnsl48cfg/shims"
 
-
 PS1='[\u \W]\$ '
 
 alias ls='ls --color=auto'
@@ -23,3 +22,4 @@ alias mk='microk8s kubectl'
 alias cd='cd -P'
 
 export CHROME_EXECUTABLE=google-chrome-stable
+export _JAVA_AWT_WM_NONREPARENTING=1  # AWT-Xmonad compatibility
