@@ -1,0 +1,34 @@
+#!/usr/bin/env python
+
+import sys
+
+_apps = [
+    'alacritty',
+    'dunst',
+    'feh',
+    'rofi',
+    'spectacle',
+    'xlock',
+]
+
+def find_missing_apps():
+    import shutil
+    missing = []
+    for app in _apps:
+        if shutil.which(app) is None:
+            missing.append(app)
+
+    return missing
+
+def main():
+    missing_apps = find_missing_apps()
+
+    if len(missing_apps):
+        print(
+            'Missing the following apps: {}'.format(', '.join(missing_apps)),
+            file=sys.stderr
+        )
+        sys.exit(1)
+
+if __name__ == '__main__':
+    main()
