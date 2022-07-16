@@ -2,6 +2,7 @@ import XMonad
 import XMonad.Actions.Plane
 import XMonad.Layout.Spacing
 
+
 import Control.Monad
 import Data.Monoid
 
@@ -18,6 +19,7 @@ import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
 
+
 data Dnsl48Workspaces = Dnsl48Workspaces {
     wsLines :: Int,
     wsSpaces :: Int
@@ -32,7 +34,7 @@ dnsl48Workspaces = Dnsl48Workspaces {
 }
 
 
-main = xmonad defaultConfig
+main = xmonad def
   {
     modMask = mod4Mask,
     borderWidth = 2,
